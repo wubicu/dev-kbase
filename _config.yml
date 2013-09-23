@@ -1,2 +1,3 @@
+baseurl:  /kbase
 markdown: redcarpet
 pygments: true
