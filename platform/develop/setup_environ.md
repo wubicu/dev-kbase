@@ -108,17 +108,17 @@ Python 開發環境會以 [virtualenv](https://pypi.python.org/pypi/virtualenv) 
 
 ### Node
 
-為了方便管理 node 套件，而不污染系統，我們建議採用 [nvm](https://github.com/creationix/nvm) 來安裝 node 環境。nvm 會在使用者目錄中安裝 node 環境並且支援同時安裝多個版本的 node 環境。安裝 nvm 的方法不分 Ubuntu 和 OS X。
+為了方便管理 Node 套件，而不污染系統，我們建議採用 [NVM](https://github.com/creationix/nvm) 來安裝 Node 環境。NVM 會在使用者目錄中安裝 Node 環境並且支援同時安裝多個版本的 Node 環境。安裝 NVM 的方法不分 Ubuntu 和 OS X。
 
-若 node 環境是用來開發 web 前端的話，可以在 node 的全域環境中安裝下列套件
+若 Node 環境是用來開發 web 前端的話，可以在 Node 的全域環境中安裝下列工具套件
 
-  - yo
-  - bower
-  - grunt-cli
+  - [Yeoman](http://yeoman.io)
+  - [Bower](http://bower.io)
+  - [Grunt](http://gruntjs.com)
 
-依照 [nvm](https://github.com/creationix/nvm) 的安裝說明安裝 nvm 和 node。
+依照 [NVM](https://github.com/creationix/nvm) 的安裝說明安裝 NVM 和 Node。
 
-安裝 nvm
+安裝 NVM
 
     curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 
@@ -126,7 +126,7 @@ Python 開發環境會以 [virtualenv](https://pypi.python.org/pypi/virtualenv) 
 
     wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
 
-安裝 node
+安裝 Node
 
     nvm install 0.10.19
     nvm use 0.10.19
@@ -138,34 +138,96 @@ Python 開發環境會以 [virtualenv](https://pypi.python.org/pypi/virtualenv) 
 
 ### Ruby
 
-#### Ubuntu
+Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系統內建的 Ruby 環境，我們也建議使用 [RVM](http://rvm.io) 來安裝 Ruby 執行環境。NVM 基本上是學 RVM 的，所以用法上是類似的。它也會在使用者目錄中安裝多個版本的 Ruby 執行環境。同樣的，安裝 RVM 的方法也不分 Ubuntu 和 OS X。
 
+我們安裝 Ruby 執行環境主要是為了進行下列工作
 
-#### OS X
+  - 使用 [Compass](http://compass-style.org) 編譯 [SASS](http://sass-lang.com) 樣式檔
+  - 使用 [Jekyll](http://jekyllrb.com) 將 Markdown 文件檔轉成靜態網站或 Blog
 
+依照 [RVM](http://rvm.io) 的安裝說明安裝 RVM 和 Ruby。
+
+安裝 RVM
+
+    \curl -L https://get.rvm.io | bash
+
+安裝 Ruby
+
+    rvm insstall 1.9.3
+    rvm use 1.9.3 --default
+
+安裝開發工具套件到全域環境
+
+    # 安裝 compass 工具
+    gem install compass
+
+    # 安裝 Jekyll 工具
+    gem install jekyll
 
 ### 文件和圖表
 
-  - pandoc
-  - LaTeX
-  - graphviz
-  - plantuml
+我們需要下列工具來轉換 Markdown 文件檔和繪製圖表
+
+  - [Pandoc 文件轉換器](http://johnmacfarlane.net/pandoc/)
+  - [LaTeX 排版系統](http://www.latex-project.org) ([TeX Live](http://www.tug.org/texlive/) 或 [MacTeX](http://www.tug.org/mactex/))
+  - [Graphviz 圖形視覺化工具](http://www.graphviz.org)
+  - [PlantUML UML 圖表繪製工具](http://plantuml.sourceforge.net)
 
 #### Ubuntu
 
+安裝 Pandoc
+
+    sudo apt-get install pandoc
+
+安裝 LaTeX
+
+    sudo apt-get install texlive texlive-xetex
+
+安裝 Graphviz
+
+    sudo add-apt-repository ppa:gviz-adm/graphviz-dev
+    sudo apt-get update
+    sudo apt-get install graphviz
+
+安裝 PlantUML
+
+從 Wubicu 在 GitHub 上的 plantuml\_wrapper (<http://github.com/wubicu/plantuml_wrapper>) 專案下載安裝到 `/usr/local` 目錄下。
 
 #### OS X
 
+安裝 Pandoc
 
-### 編輯器和 IDE
+從 Pandoc 網站[下載](http://johnmacfarlane.net/pandoc/installing.html) OS X 的安裝程式 (DMG 檔) 安裝。`pandoc` 執行檔將被裝到 `/usr/local/bin` 目錄下。
 
-  - Sublime Text 3
-  - JetBrains IDEs
+安裝 LaTeX
 
-#### Ubuntu
+從 MacTeX 網站[下載](http://tug.org/mactex/morepackages.html) `BasicTeX.pkg` OS X 套件來安裝。此套件會安裝我們所需要的 LaTeX 元件 (XeLaTeX 等)。
+
+安裝 Graphviz
+
+從 Graphviz 網站[下載](http://www.graphviz.org/Download_macos.php)與 OS X 版本相符的套件檔安裝。
+
+安裝 PlantUML
+
+從 Wubicu 在 GitHub 上的 plantuml\_wrapper (<http://github.com/wubicu/plantuml_wrapper>) 專案下載安裝到 `/usr/local` 目錄下。
+
+### Sublime Text 3 編輯器
+
+安裝 Sublime Text 3
+
+從 Sublime Text 3 網站[下載](http://www.sublimetext.com/3)安裝程式或套件來安裝。在 OS X 下可以用
+
+    sudo ln -s /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+
+建立符號連結以方便在命令列下叫用 Sublime Text 3 編輯器。
+
+安裝 Pacakge Control
 
 
-#### OS X
+安裝所需套件
+
+
+設定 Pandown
 
 
 ### 雲端和虛擬機
