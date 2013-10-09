@@ -66,6 +66,11 @@ GUI 前端可採用 [SourceTree](http://www.sourcetreeapp.com)，App Store 上�
     # 請參考 man git-config 中的 push.default 說明
     git config --global push.default simple
 
+    # 啟用 HTTP 帳號密碼快取 (範例中快取時限為一小時)
+    git config --global credential.helper 'cache --timeout=3600'
+
+建議最好還是使用 SSH 方式存取 Git 檔案庫。
+
 ### JDK
 
 要開發 Java 程式或要使用像是 JetBrains 或 Eclipse 等 IDE 的話，就需要安裝 JDK。
@@ -117,6 +122,16 @@ Python 開發環境會以 [virtualenv](https://pypi.python.org/pypi/virtualenv) 
   - [Grunt](http://gruntjs.com)
 
 依照 [NVM](https://github.com/creationix/nvm) 的安裝說明安裝 NVM 和 Node。
+
+另外，由於 `nvm` 會使用 `curl` 命令下載檔案，所以最好是先確認系統內有沒有安裝 `curl` (Ubuntu 和 OS X 並沒內建安裝 `curl`)。若沒有的話，以下列命令安裝
+
+Ubuntu
+
+    sudo apt-get install curl
+
+OS X
+
+    sudo port install curl
 
 安裝 NVM
 
@@ -263,7 +278,7 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
         }
     }
 
-`mainfont` 指明要使用的中文字型名稱，`AR PL UMing CN` 是 Ubuntu 平台上的免費文鼎明體字型。可以任意改成系統上合適的字形名稱 (一般文件最好使用黑體和明體等有較襯線的字體)。OS X 上可使用 `Heiti TC Light` (黑體 - 繁)。如果使用了我們的 Pandoc 中文模板，請將 `mainfont` 改為 `cjkmainfont`。
+`mainfont` 指明要使用的中文字型名稱，`AR PL UMing CN` 是 Ubuntu 平台上的免費文鼎明體字型。可以任意改成系統上合適的字型名稱 (一般文件最好使用黑體和明體等有較襯線的字型)。OS X 上可使用 `Heiti TC Light` (黑體 - 繁)。如果使用了我們的 Pandoc 中文模板，請將 `mainfont` 改為 `cjkmainfont`。
 
 Ubuntu 上的中文輸入法問題
 
@@ -272,6 +287,20 @@ Sublime Text 3 目前在 Ubuntu 上無法使用 iBus 系統的輸入法，所以
     sudo apt-get install  scim scim-tables-zh
 
 安裝後記得到**系統設定值**的**語言支援**中將輸入法系統改為 SCIM，並且登出再登入。
+
+建議的個人設定
+
+使用 Preferences -> Settings - User 選單項目開啟個人設定檔，我們建議下列設定以啟用將 tab 字元轉換為空格字元的功能
+
+    ...
+    "translate_tabs_to_spaces": true
+    ...
+
+在 Ubuntu 下，預設的字型似乎不是等寬字型，這對編程並不方便，所以也建議以下列設定改用等寬字型
+
+    ...
+    "font_face": "Liberation Mono"
+    ...
 
 ### 雲端和虛擬機工具
 
