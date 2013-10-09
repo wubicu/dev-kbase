@@ -72,7 +72,7 @@ GUI 前端可採用 [SourceTree](http://www.sourcetreeapp.com)，App Store 上�
 
 #### Ubuntu
 
-透過第三方 ([webupd8team](https://launchpad.net/~webupd8team/+archive/java)) 的 PPA 安裝 Oracle JDK 7
+透過第三方 ([webupd8team](https://launchpad.net/~webupd8team/+archive/java)) 的 [PPA](http://en.wikipedia.org/wiki/Personal_Package_Archive) 安裝 Oracle JDK 7
 
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
@@ -215,7 +215,9 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Sublime Text 3
 
-從 Sublime Text 3 網站[下載](http://www.sublimetext.com/3)安裝程式或套件來安裝。在 OS X 下可以用
+從 Sublime Text 3 網站[下載](http://www.sublimetext.com/3)安裝程式或套件來安裝。
+
+另外，在 OS X 下可以下面命令
 
     sudo ln -s /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
@@ -223,21 +225,66 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Pacakge Control
 
+依照 [Package Control](https://sublime.wbond.net) 官網的[安裝說明](https://sublime.wbond.net/installation)安裝即可。依官網的說明，我們建議使用手動下載的安裝方式。
 
 安裝所需套件
 
+我們建議安裝下列 Sublime Text 套件
+
+  - [Better CoffeeScript](https://sublime.wbond.net/packages/Better%20CoffeeScript) - 幫助撰寫 CoffeeScript 程式碼
+  - [SASS](https://sublime.wbond.net/packages/Sass) - 幫助撰寫 SASS 樣式檔
+  - [sublimelint](https://sublime.wbond.net/packages/sublimelint) - 提供錯誤檢查提示 ([lint](http://en.wikipedia.org/wiki/Lint_(software)))
+  - [SublimeOnSaveBuild](https://sublime.wbond.net/packages/SublimeOnSaveBuild) - 提供存檔時執行建置動作的功能
+  - [MarkdownEditing](https://sublime.wbond.net/packages/MarkdownEditing) - 幫助撰寫 Markdown 文件
+  - [Markdown Preview](https://sublime.wbond.net/packages/Markdown%20Preview) - 提供 Markdown 文件轉換結果的預覽功能
+  - [Pandown](https://sublime.wbond.net/packages/Pandown) - 幫助叫用 Pandoc 來轉換 Pandoc Markdown 文件
+  - [Perv - Color Scheme](https://sublime.wbond.net/packages/Perv%20-%20Color%20Scheme) - 色彩方案
+  - [Sublime Diagram](https://github.com/wubicu/sublime_diagram_plugin) - 透過叫用 PlantUML 將文件中撰寫的 PlantUML 圖表繪製出來
+
+除了 Sublime Diagram 外，都可使用 Package Control 來安裝。請使用 `Shift` + `Cmd` + `P` (OS X) 或 `Shift` + `Ctrl` + `P` (Ubuntu) 來叫用 Command Palette，並選擇 `Package Control: Install Package` 命令來安裝上述套件。
+
+至於 Sublime Diagram，請從 GitHub [下載 ZIP 檔](https://github.com/wubicu/sublime_diagram_plugin/archive/master.zip)，解開後放到 Sublime Text 的套件目錄 (用 Preferences -> Browse Packages 選單項目打開套件目錄) 即可。
 
 設定 Pandown
 
+為了傳遞參數給 Pandoc 以在轉換成 PDF 檔時支援中文，所以必須對 Pandown 進行設定。請使用 Preferences -> Package Settings -> Pandown -> Settings - User 選單項目來開啟 Pandown 的個人設定檔，一開始此設定檔是空的，並加入下列內容 (JSON 格式)
 
-### 雲端和虛擬機
+    {
+        "pandoc_arguments":
+        {
+            "command_arguments":
+            {
+                "latex-engine": "xelatex",
+                "variables":
+                {
+                    "mainfont": "AR PL UMing CN"
+                }
+            }
+        }
+    }
 
-  - libvirt
-  - vagrant
-  - euca2tools
+`mainfont` 指明要使用的中文字型名稱，`AR PL UMing CN` 是 Ubuntu 平台上的免費文鼎明體字型。可以任意改成系統上合適的字形名稱 (一般文件最好使用黑體和明體等有較襯線的字體)。OS X 上可使用 `Heiti TC Light` (黑體 - 繁)。如果使用了我們的 Pandoc 中文模板，請將 `mainfont` 改為 `cjkmainfont`。
 
-#### Ubuntu
+### 雲端和虛擬機工具
 
+為了進行開發和部署，我們常會需要使用虛擬機或雲端平台來做測試。雖然在 OS X 和 Ubuntu 上都有 VMware 和 VirtualBox 虛擬機系統可使用，但是如果是為了建立測試用的伺服器系統的話，我們比較偏好在 Ubuntu 上使用 [KVM](http://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine) 的虛擬機。
 
-#### OS X
+在 OS X 上還是可以透過 VMware Fusion 運行 Ubuntu 的虛擬機，並在此 Ubuntu 虛擬機中使用 KVM 虛擬機，當然前提是機器的 CPU 要支援虛擬化指令集，Mac 很早就使用有支援的 CPU 了，所以問題在 CPU 的效能夠不夠和 RAM 夠不夠多 (8GB 以上會比較好)。
 
+在 Ubuntu 上安裝 KVM
+
+Ubuntu 對 KVM 的支援是透過 [libvirt](http://libvirt.org) 來操作使用的。請參考 Ubuntu 的[說明安裝 libvirt](https://help.ubuntu.com/13.04/serverguide/libvirt.html)。
+
+裝好 libvirt 後，雖然可以直接使用 libvirt 和 [CloudInit](https://help.ubuntu.com/community/CloudInit) 來建立虛擬機 (請參考 [Ubuntu 的說明](https://help.ubuntu.com/13.04/serverguide/cloud-images-and-vmbuilder.html))，但是步驟比較麻煩，而且不具可攜性，對非 RD 的人員來說門檻較高，比較好的解決方案是使用接下來要安裝的 Vagrant。不過直接使用 libvirt 對 RD 來說，最好還是學起來。
+
+安裝 Vagrant
+
+[Vagrant](http://www.vagrantup.com) 能透過設定檔 (Vagrantfile) 和虛擬機映像檔 (box) 來輕易與團隊成員分享已配置好的虛擬機，其他人可以快速的使用相同的虛擬機系統來進行開發和測試。請直接從 Vagrant 網站[下載](http://downloads.vagrantup.com)安裝。
+
+Euca2ools
+
+雖然 Vagrant 有 provider 可以支援 AWS 和 OpenStack，但有時候可能會需要用命令直接操作 AWS 和 OpenStack。這時如果不想使用 AWS 或 OpenStack 的命令列工具的話，就可以使用 [Euca2ools](http://www.eucalyptus.com/docs/euca2ools/3.0/euca2ools-guide/)。Euca2ools 雖然是 [Eucalyptus 雲端平台](http://en.wikipedia.org/wiki/Eucalyptus_(computing))的命令列工具，但是因為它支援 EC2 API 但又不綁 AWS，所以可以用它來操作 AWS 和 OpenStack。
+
+Euca2ools 是 Python 套件，但並沒有放到 PyPI 上，但還是可以用 `pip` 或 `easy_install` 直接從 GitHub 下載安裝 (如下列命令)。另外，我們建議只安裝到所需專案的 Python 虛擬環境中即可。
+
+    pip install http://github.com/eucalyptus/euca2ools/archive/3.0.0.zip
