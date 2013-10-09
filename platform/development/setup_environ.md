@@ -265,6 +265,14 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 `mainfont` 指明要使用的中文字型名稱，`AR PL UMing CN` 是 Ubuntu 平台上的免費文鼎明體字型。可以任意改成系統上合適的字形名稱 (一般文件最好使用黑體和明體等有較襯線的字體)。OS X 上可使用 `Heiti TC Light` (黑體 - 繁)。如果使用了我們的 Pandoc 中文模板，請將 `mainfont` 改為 `cjkmainfont`。
 
+Ubuntu 上的中文輸入法問題
+
+Sublime Text 3 目前在 Ubuntu 上無法使用 iBus 系統的輸入法，所以必須改用 SCIM 系統的輸入法。所以請安裝 SCIM 和其輸入法。
+
+    sudo apt-get install  scim scim-tables-zh
+
+安裝後記得到**系統設定值**的**語言支援**中將輸入法系統改為 SCIM，並且登出再登入。
+
 ### 雲端和虛擬機工具
 
 為了進行開發和部署，我們常會需要使用虛擬機或雲端平台來做測試。雖然在 OS X 和 Ubuntu 上都有 VMware 和 VirtualBox 虛擬機系統可使用，但是如果是為了建立測試用的伺服器系統的話，我們比較偏好在 Ubuntu 上使用 [KVM](http://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine) 的虛擬機。
