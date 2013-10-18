@@ -34,7 +34,7 @@ Ubuntu 有桌面和服務器二個版本，並且於每年的四月和十月釋�
 
     sudo apt-get install git git-flow
 
-GUI 前端可採用 [RabbitVCS](http://rabbitvcs.org)，請參考官網[文件](http://wiki.rabbitvcs.org/wiki/install/ubuntu) 並按下列命令安裝套件:
+GUI 前端可採用 [RabbitVCS](http://rabbitvcs.org)，請參考官網[文件](http://wiki.rabbitvcs.org/wiki/install/ubuntu)並按下列命令安裝套件:
 
     sudo add-apt-repository ppa:rabbitvcs/ppa
     sudo apt-get update
@@ -168,7 +168,7 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Ruby
 
-    rvm insstall 1.9.3
+    rvm install 1.9.3
     rvm use 1.9.3 --default
 
 安裝開發工具套件到全域環境
