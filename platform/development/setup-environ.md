@@ -200,8 +200,6 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Graphviz
 
-    sudo add-apt-repository ppa:gviz-adm/graphviz-dev
-    sudo apt-get update
     sudo apt-get install graphviz
 
 安裝 PlantUML
