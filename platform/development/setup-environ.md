@@ -85,7 +85,13 @@ GUI 前端可採用 [SourceTree](http://www.sourcetreeapp.com)，App Store 上�
 
 #### OS X
 
-雖然 OS X 內建的 Java VM 只支援到 1.6.x，但若只是用來執行 IDE 的話是足夠的，不需要安裝 Oracle 的 JDK。
+在 OS X 10.8 (Mountain Lion) 之前的系統裡內建的 Java VM 只支援到 1.6.x，但若只是用來執行 IDE 的話是足夠的，不需要安裝 Oracle 的 JDK。
+
+OS X 10.9 Mavericks 已經不內建 JDK 了，需要安裝 Oracle JDK。請打開終端機輸入下列命令
+
+    java -version
+
+如果 Java 還未安裝，就會出現一個對話盒請你安裝 Java。請點選『更多資訊』，它會引導你到 Oracle Java 下載網站，請下載 OS X x64 版本的 JDK 安裝套件來安裝。如果要安裝 Java 6 的話，就必須從 Apple 下載[更新套件](http://support.apple.com/kb/DL1572)來安裝。
 
 ### Python
 
