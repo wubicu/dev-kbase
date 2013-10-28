@@ -97,12 +97,12 @@ OS X 10.9 Mavericks 已經不內建 Java 支援了，有二個方法可以安裝
      
      請打開終端機輸入下列命令
 
-         java -version
+        java -version
 
      如果 Java 還未安裝，就會出現一個對話盒請你安裝 Java。請點選『更多資訊』，它會引導你到 Oracle Java 下載網站，請下載 OS X x64 版本的 JDK 安裝套件來安裝。需要移除的話，只要刪除下列二個目錄即可：
 
-     - `/Library/Java/JavaVirtualMachines/jdk<major>.<minor>.<macro[_update]>.jdk`
-     - `/Library/Internet Plug-Ins/JavaAppletPlugin.plugin`
+        /Library/Java/JavaVirtualMachines/jdk<major>.<minor>.<macro[_update]>.jdk
+        /Library/Internet Plug-Ins/JavaAppletPlugin.plugin
 
 ##### 關於 Java Applet Plugin
 
