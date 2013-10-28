@@ -172,9 +172,9 @@ OS X
 
 安裝 Node
 
-    nvm install 0.10.19
-    nvm use 0.10.19
-    nvm alias default 0.10.19
+    nvm install 0.10.21
+    nvm use 0.10.21
+    nvm alias default 0.10.21
 
 安裝前端開發工具套件到全域環境
 
@@ -197,8 +197,8 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Ruby
 
-    rvm install 1.9.3
-    rvm use 1.9.3 --default
+    rvm install 2.0.0
+    rvm use 2.0.0 --default
 
 安裝開發工具套件到全域環境
 
