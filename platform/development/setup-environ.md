@@ -87,11 +87,34 @@ GUI 前端可採用 [SourceTree](http://www.sourcetreeapp.com)，App Store 上�
 
 在 OS X 10.8 (Mountain Lion) 之前的系統裡內建的 Java VM 只支援到 1.6.x，但若只是用來執行 IDE 的話是足夠的，不需要安裝 Oracle 的 JDK。
 
-OS X 10.9 Mavericks 已經不內建 JDK 了，需要安裝 Oracle JDK。請打開終端機輸入下列命令
+OS X 10.9 Mavericks 已經不內建 Java 支援了，有二個方法可以安裝 Java。
 
-    java -version
+  1. 安裝 Apple 的 Java for OS X 2013-05 (只有 Java 6)
+     
+     可以[直接下載](http://support.apple.com/kb/DL1572)來安裝，或在執行 PyCharm 等需要 Java 6 JVM 的程式時安裝。
 
-如果 Java 還未安裝，就會出現一個對話盒請你安裝 Java。請點選『更多資訊』，它會引導你到 Oracle Java 下載網站，請下載 OS X x64 版本的 JDK 安裝套件來安裝。如果要安裝 Java 6 的話，就必須從 Apple 下載[更新套件](http://support.apple.com/kb/DL1572)來安裝。
+  2. 安裝 Oracle 的 Java 7
+     
+     請打開終端機輸入下列命令
+
+         java -version
+
+     如果 Java 還未安裝，就會出現一個對話盒請你安裝 Java。請點選『更多資訊』，它會引導你到 Oracle Java 下載網站，請下載 OS X x64 版本的 JDK 安裝套件來安裝。需要移除的話，只要刪除下列二個目錄即可：
+
+     - `/Library/Java/JavaVirtualMachines/jdk<major>.<minor>.<macro[_update]>.jdk`
+     - `/Library/Internet Plug-Ins/JavaAppletPlugin.plugin`
+
+##### 關於 Java Applet Plugin
+
+瀏覽器會從 `/Library/Internet Plug-Ins/` 目錄載入插件，`JavaAppletPlugin.plugin` 通常就是 Java Applet plugin。在 OS X Mavericks 上預設是一個符號連結到
+    
+    /System/Library/Java/Support/CoreDeploy.bundle/Contents/JavaAppletPlugin.plugin
+
+這個插件就只是提供一個引導你去下載 Oracle JRE 的對話盒而已。如果裝了 Oracle JRE 或 JDK 的話，這個插件就會被取代成 Oracle Java 的 Applet 插件。如果系統上有安裝 Java for OS X 2013-05 的話，`JavaAppletPlugin.plugin` 就會連結到
+
+    /System/Library/Java/Support/Deploy.bundle/Contents/Resources/JavaPlugin2_NPAPI.plugin
+
+這個插件會提供 Java 6 的 Applet 功能。
 
 ### Python
 
