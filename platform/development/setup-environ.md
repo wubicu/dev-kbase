@@ -140,6 +140,12 @@ Python 開發環境會以 [virtualenv](https://pypi.python.org/pypi/virtualenv) 
     # 若想把 Cython 安裝到 MacPorts 的 Python 系統套件庫中，請用下列命令
     sudo port install py27-cython
 
+裝好後，Macports 並不會自動建立 `/opt/local/bin/python`，所以若叫用 `python`，會叫用到 OS X 內建的 Python 2.7。可以使用 Macports 的 `select` 命令來建立並選擇 `/opt/local/bin/python` 要連結的 Python 版本。例如
+
+    sudo port select --set python python27
+
+會建立 `/opt/local/bin/python` 並連結至 `/opt/local/bin/python27`。
+
 ### Node
 
 為了方便管理 Node 套件，而不污染系統，我們建議採用 [NVM](https://github.com/creationix/nvm) 來安裝 Node 環境。NVM 會在使用者目錄中安裝 Node 環境並且支援同時安裝多個版本的 Node 環境。安裝 NVM 的方法不分 Ubuntu 和 OS X。
@@ -176,9 +182,23 @@ OS X
     nvm use 0.10.21
     nvm alias default 0.10.21
 
+如果不用 NVM 來安裝的話，請直接安裝套件
+
+Ubuntu
+
+    sudo add-apt-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install nodejs
+
+OS X
+
+    sudo port install nodejs npm
+
 安裝前端開發工具套件到全域環境
 
     npm install -g yo bower grunt-cli
+
+如果是用套件安裝的 Node 環境，請使用 sudo。
 
 ### Ruby
 
@@ -200,6 +220,17 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
     rvm install 2.0.0
     rvm use 2.0.0 --default
 
+如果不用 RVM 來安裝的話，請直接安裝套件
+
+Ubuntu
+
+直接使用預設安裝的 Ruby 1.9.3 即可
+
+OS X
+
+    sudo port install ruby20
+    sudo port select --set ruby ruby20
+
 安裝開發工具套件到全域環境
 
     # 安裝 compass 工具
@@ -207,6 +238,8 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
     # 安裝 Jekyll 工具
     gem install jekyll
+
+如果是用套件安裝的 Node 環境，請使用 sudo。
 
 ### 文件和圖表
 
