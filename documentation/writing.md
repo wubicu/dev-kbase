@@ -54,7 +54,7 @@ Pandoc 是命令列工具，所以必須到各平台的命令列模式下使用�
 
 要輸出中文 PDF，可以簡單地使用下列命令︰
 
-    pandoc -o c.pdf --latex-engine=xelatex -V mainfont='AR PL UMing CN'
+    pandoc -o c.pdf --latex-engine=xelatex -V mainfont='AR PL UMing CN' c.md
 
 `mainfont` 指定使用的字型，`AR PL UMing CN` 是 Ubuntu 系統上的文鼎 TTF 字型名稱。  
 **!!!注意!!!** *不同的系統不一定有相同的字型。*
