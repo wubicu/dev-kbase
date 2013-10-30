@@ -12,7 +12,7 @@ Ubuntu 有桌面和服務器二個版本，並且於每年的四月和十月釋�
 
 ### 安裝在虛擬機上
 
-為了有較好的效能，最好使用有支援[虛擬化指令集](http://en.wikipedia.org/wiki/X86_virtualization)的機器 (近年的新機器應該都已使用有支援的 CPU 了)，並且請勿必安裝 VMware Tools 和 VirtualBox Guest Addition。它們除了可以提昇效能外，還可以提供一些方便的功能，像是與主系統共用的共用資料夾，和較好的顯示支援。
+為了有較好的效能，最好使用有支援[虛擬化指令集](http://en.wikipedia.org/wiki/X86_virtualization)的機器 (近年的新機器應該都已使用有支援的 CPU 了)，並且請務必安裝 VMware Tools 和 VirtualBox Guest Addition。它們除了可以提昇效能外，還可以提供一些方便的功能，像是與主系統共用的共用資料夾，和較好的顯示支援。
 
 ## 準備 OS X 環境
 
