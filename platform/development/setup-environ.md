@@ -1,6 +1,6 @@
 # 建立開發環境平台
 
-為了方便使用開源軟體來開發非 Windows 平台的應用程式，我們強列建議使用 Ubuntu 或 OS X 作為開發環境平台。
+為了方便使用開源軟體來開發非 Windows 平台的應用程式，我們強烈建議使用 Ubuntu 或 OS X 作為開發環境平台。
 
 由於市面上少有安裝 Ubuntu 出貨的個人電腦，而且近幾年處理機和虛擬化技術的進步，所以若要安裝 Ubuntu 系統，我們也建議採用虛擬機器來安裝。Windows 系統上可以使用免費的 [VMware Player](http://www.vmware.com/products/player/) 和 [VirtualBox](https://www.virtualbox.org) 來建立虛擬機，但 VMware Player 的效能會比較好。在 OS X 上免費的解決方案就只有 VirtualBox。
 
