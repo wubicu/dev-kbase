@@ -253,3 +253,52 @@ Rackspace Private Cloud cookbook 支援多網卡和單網卡，但單網卡時�
 
 ## 開始使用 OpenStack
 
+### 存取 Dashboard
+
+使用瀏覽器連線到 Controller 節點，如果安裝正確的話，應該可以看到 OpenStack Horizon 的登入頁面。使用 Rackspace Private Cloud Cookbooks 安裝的話，預設的帳號密碼分別是 "admin" 和 "secrete"。
+
+### 上傳系統映像檔
+
+虛擬機啟動後必須有系統可以運行，所以在建立虛擬機前必須要先準備好系統映像檔讓虛擬機可以使用。上傳映像檔到 OpenStack 中有許多方法，最簡單的方法就是使用 Dashboard 建立映像檔的功能來上傳。這個功能提供二種方法來取得映像檔
+
+  1. 讓使用者指定映像檔的 URI，系統會從此 URI 取得映像檔
+  2. 讓使用者從存取管理頁面的系統上傳映像檔
+
+要給 OpenStack 使用的映像檔必須要符合一些條件，詳細說明請參考 [OpenStack Virtual Machine Image Guide](http://docs.openstack.org/image-guide/content/)。
+
+Canonical 有維護一個官方的 [Ubuntu cloud image](http://docs.openstack.org/image-guide/content/ch_obtaining_images.html#ubuntu-images)，它以 Ubuntu 的版本和釋出日期來組織，'current' 目錄中的是最新的釋出。 
+
+### 設定網路
+
+如果安裝了 Neutron (Quantum)，就需要先建立虛擬網路，請參考 [OpenStack Networking Administration Guide](http://docs.openstack.org/grizzly/openstack-network/admin/content/)。
+
+### 建立專案
+
+每個虛擬機實例必須屬於某個專案，所以在啟動虛擬機前要先建立專案，請使用管理界面來建立專案。
+
+### 建立存取金鑰對
+
+要使用 SSH 安全的登入虛擬機可以使用 SSH 金鑰登入，OpenStack 可以在啟動虛擬機時將可存取的公鑰放入虛擬機內。所以在啟動前，必須指定可用來存取該虛擬機的金鑰對。金鑰對也是屬於專案的資源，一個專案可以建立多個金鑰對。
+
+### 更新安全群組
+
+安全群組是一組套用到流入封包的規則，符合規則的封包才能存取該虛擬機，否則將會被拒絕。一般來說，至少要允許 SSH 和 ping 連線。因此套用到虛擬機實例上的安全群組中，至少要有下列規則。
+
+    +-------------+-----------+---------+-----------+--------------+
+    | IP Protocol | From Port | To Port |  IP Range | Source Group |
+    +-------------+-----------+---------+-----------+--------------+
+    |     icmp    |     -1    |    -1   | 0.0.0.0/0 |              |
+    |     tcp     |     22    |    22   | 0.0.0.0/0 |              |
+    +-------------+-----------+---------+-----------+--------------+
+
+### 建立虛擬機實例
+
+
+
+### 存取虛擬機
+
+
+
+#### 為 Nova-Network 建立可配置的浮動 IP 位址 
+
+
