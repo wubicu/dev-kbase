@@ -164,7 +164,7 @@ Vagrant 內建使用的虛擬平台是 VirtualBox，要使用 VMware 或雲端�
 
 另外，要注意的是 boxes 是與 provider 相關的，不同的 provider 要使用不同 boxes，所以必須要先安裝可使用的 boxes 到 Vagrant 環境裡。我們的 archive 伺服器有準備幾個 libvirt 的 box 可用。可以下列命令來安裝。
 
-    vagrant box add precise32 http://archive.wubicu.com/vagrant-boxes/libvirt/precise32.box
+    vagrant box add precise32 http://archive.wubicu.com/vagrant/libvirt/precise32.box
 
 使用 [vagrant-libvirt](https://github.com/pradels/vagrant-libvirt) 要注意幾點
 
