@@ -150,19 +150,21 @@ Vagrant 內建使用的虛擬平台是 VirtualBox，要使用 VMware 或雲端�
 
   - [vagrant-libvirt](https://github.com/pradels/vagrant-libvirt)
   - [vagrant-aws](https://github.com/mitchellh/vagrant-aws)
-  - [OpenStack](https://github.com/mat128/vagrant-openstack)
+  - [vagrant-openstack-plugin](https://github.com/cloudbau/vagrant-openstack-plugin)
+
+#### libvirt
 
 請用下列命令安裝
 
-    vagrant plugin install vagrant-openstack
+    vagrant plugin install vagrant-libvirt
 
 啟動時要指明 provider
 
-    vagrant up --provider=openstack
+    vagrant up --provider=libvirt
 
-另外，要注意的是 boxes 是與 provider 相關的，不同的 provider 要使用不同 boxes，所以必須要先安裝可使用的 boxes 到 Vagrant 環境裡。
+另外，要注意的是 boxes 是與 provider 相關的，不同的 provider 要使用不同 boxes，所以必須要先安裝可使用的 boxes 到 Vagrant 環境裡。我們的 archive 伺服器有準備幾個 libvirt 的 box 可用。可以下列命令來安裝。
 
-#### libvirt 注意事項
+    vagrant box add precise32 http://archive.wubicu.com/vagrant-boxes/libvirt/precise32.box
 
 使用 [vagrant-libvirt](https://github.com/pradels/vagrant-libvirt) 要注意幾點
 
@@ -171,3 +173,76 @@ Vagrant 內建使用的虛擬平台是 VirtualBox，要使用 VMware 或雲端�
   2. vagrant-libvirt 目前只支援用 [MacVTap](http://virt.kernelnewbies.org/MacVTap) 的 [libvirt 網路界面](http://www.libvirt.org/formatdomain.html#elementsNICSDirect)來提供公開網路 (public network) 功能 (可從主端外的機器連入)。
   
     因為 MacVTap 必須使用一個實體的網路界面，所以如果只有一個實體網路界面而且又使用 `brctl` 來建立橋接界面給其他 libvirt domain 用的話，那就沒辦法用 vagrant-libvirt 建立有公開網路的虛擬機。
+
+#### aws
+
+使用下列命令安裝 vagrant-aws provider 和 dummy box (image 在 AWS 上，box 本身不需要提供 image)
+
+    vagrant-plugin install vagrant-aws
+    vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+
+初始 Vagrant 專案後，並參考下列內容來設定 Vagrantfile
+
+~~~
+    ...
+    config.vm.box = "dummy"
+    ...
+    config.vm.provider :aws do |aws, override|
+        aws.access_key_id = "AWS ACCESS KEY ID"
+        aws.secret_access_key = "AWS SECRET ACCESS KEY"
+        aws.keypair_name = "金鑰對名稱"
+
+        aws.region = "AWS 的區域"                 # 例如 ap-southeast-1
+        aws.instance_type = "EC2 實例類型"         # 例如 ti.micro
+        aws.ami = "AMI 的 ID"                   # 例如 ami-5afeab08
+        aws.security_groups = [要使用的安全群組名清單]
+
+        override.ssh.username = "ubuntu"
+        override.ssh.private_key_path = "金鑰對的私鑰檔路徑"
+    end
+~~~
+
+然後執行 `vagrant up --provider=aws` 就可以啟動 AWS EC2 實例。
+
+#### openstack
+
+使用下列命令安裝 vagrant-openstack-plugin provider 和 dummy box (image 在 OpenStack 上，box 本身不需要提供 image)
+
+    vagrant plugin install vagrant-openstack-plugin
+    vagrant box add dummy github.com/cloudbau/vagrant-openstack-plugin/raw/master/dummy.box
+
+初始 Vagrant 專案後，並參考下列內容來設定 Vagrantfile
+
+~~~
+    ...
+    require 'vagrant-openstack-plugin'
+    ...
+    config.vm.box = "dummy"
+    ...
+    ssh.private_key_path = "金鑰對的私鑰檔路徑"
+    ...
+    config.vm.provider :openstack do |os|
+        aws.access_key_id = "AWS ACCESS KEY ID"
+        aws.secret_access_key = "AWS SECRET ACCESS KEY"
+        aws.keypair_name = "金鑰對名稱"
+
+        aws.region = "AWS 的區域"                 # 例如 ap-southeast-1
+        aws.instance_type = "EC2 實例類型"         # 例如 ti.micro
+        aws.ami = "AMI 的 ID"                   # 例如 ami-5afeab08
+        aws.security_groups = [要使用的安全群組名清單]
+
+        os.username = "使用者名稱"                          # 或用 "#{ENV['OS_USERNAME']}"
+        os.api_key = "使用者密碼"                           # 或用 "#{ENV['OS_PASSWORD']}"
+        os.flavor = “flavor 名稱”                        # 如 m1.small
+        os.image = "系統映像名稱"
+        os.endpoint = "OpenStack Keystone 端點 URI"      # 或用 "#{ENV['OS_AUTH_URL']}/tokens"
+        os.keypair_name = "金鑰對名稱"
+        os.ssh_username = "SSH 的使用者名稱"
+
+        os.security_groups = [要使用的安全群組名清單]
+        os.tenant = "OpenStack 專案名稱"
+        os.floating_ip = "所要關連的浮動 IP"
+    end
+~~~
+
+然後執行 `vagrant up --provider=openstack` 就可以啟動 OpenStack nova 的實例。
