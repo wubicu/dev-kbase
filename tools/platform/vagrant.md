@@ -168,7 +168,7 @@ Vagrant 內建使用的虛擬平台是 VirtualBox，要使用 VMware 或雲端�
 
 使用 [vagrant-libvirt](https://github.com/pradels/vagrant-libvirt) 要注意幾點
 
-  1. vagrant-libvirt 的 SSH 連線支援有點問題，它只能使用檔名為 `id_rsa` 的 SSH 金鑰對來驗證。
+  1. 如果要用 SSH 來連線 libvirt 主機的話 (qemu+ssh://，不是用 SSH 連線登入所建的虛擬機)，必須注意 vagrant-libvirt 的支援有點問題，它只能使用檔名為 `id_rsa` 的 SSH 金鑰對來驗證。
 
   2. vagrant-libvirt 目前只支援用 [MacVTap](http://virt.kernelnewbies.org/MacVTap) 的 [libvirt 網路界面](http://www.libvirt.org/formatdomain.html#elementsNICSDirect)來提供公開網路 (public network) 功能 (可從主端外的機器連入)。
   

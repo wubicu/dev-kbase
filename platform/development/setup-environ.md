@@ -34,7 +34,7 @@ Ubuntu 有桌面和服務器二個版本，並且於每年的四月和十月釋�
 
     sudo apt-get install git git-flow
 
-GUI 前端可採用 [RabbitVCS](http://rabbitvcs.org)，請參考官網[文件](http://wiki.rabbitvcs.org/wiki/install/ubuntu) 並按下列命令安裝套件:
+GUI 前端可採用 [RabbitVCS](http://rabbitvcs.org)，請參考官網[文件](http://wiki.rabbitvcs.org/wiki/install/ubuntu)並按下列命令安裝套件:
 
     sudo add-apt-repository ppa:rabbitvcs/ppa
     sudo apt-get update
@@ -85,7 +85,36 @@ GUI 前端可採用 [SourceTree](http://www.sourcetreeapp.com)，App Store 上�
 
 #### OS X
 
-雖然 OS X 內建的 Java VM 只支援到 1.6.x，但若只是用來執行 IDE 的話是足夠的，不需要安裝 Oracle 的 JDK。
+在 OS X 10.8 (Mountain Lion) 之前的系統裡內建的 Java VM 只支援到 1.6.x，但若只是用來執行 IDE 的話是足夠的，不需要安裝 Oracle 的 JDK。
+
+OS X 10.9 Mavericks 已經不內建 Java 支援了，有二個方法可以安裝 Java。
+
+  1. 安裝 Apple 的 Java for OS X 2013-05 (只有 Java 6)
+     
+     可以[直接下載](http://support.apple.com/kb/DL1572)來安裝，或在執行 PyCharm 等需要 Java 6 JVM 的程式時安裝。
+
+  2. 安裝 Oracle 的 Java 7
+     
+     請打開終端機輸入下列命令
+
+        java -version
+
+     如果 Java 還未安裝，就會出現一個對話盒請你安裝 Java。請點選『更多資訊』，它會引導你到 Oracle Java 下載網站，請下載 OS X x64 版本的 JDK 安裝套件來安裝。需要移除的話，只要刪除下列二個目錄即可：
+
+        /Library/Java/JavaVirtualMachines/jdk<major>.<minor>.<macro[_update]>.jdk
+        /Library/Internet Plug-Ins/JavaAppletPlugin.plugin
+
+##### 關於 Java Applet Plugin
+
+瀏覽器會從 `/Library/Internet Plug-Ins/` 目錄載入插件，`JavaAppletPlugin.plugin` 通常就是 Java Applet plugin。在 OS X Mavericks 上預設是一個符號連結到
+    
+    /System/Library/Java/Support/CoreDeploy.bundle/Contents/JavaAppletPlugin.plugin
+
+這個插件就只是提供一個引導你去下載 Oracle JRE 的對話盒而已。如果裝了 Oracle JRE 或 JDK 的話，這個插件就會被取代成 Oracle Java 的 Applet 插件。如果系統上有安裝 Java for OS X 2013-05 的話，`JavaAppletPlugin.plugin` 就會連結到
+
+    /System/Library/Java/Support/Deploy.bundle/Contents/Resources/JavaPlugin2_NPAPI.plugin
+
+這個插件會提供 Java 6 的 Applet 功能。
 
 ### Python
 
@@ -110,6 +139,12 @@ Python 開發環境會以 [virtualenv](https://pypi.python.org/pypi/virtualenv) 
     
     # 若想把 Cython 安裝到 MacPorts 的 Python 系統套件庫中，請用下列命令
     sudo port install py27-cython
+
+裝好後，Macports 並不會自動建立 `/opt/local/bin/python`，所以若叫用 `python`，會叫用到 OS X 內建的 Python 2.7。可以使用 Macports 的 `select` 命令來建立並選擇 `/opt/local/bin/python` 要連結的 Python 版本。例如
+
+    sudo port select --set python python27
+
+會建立 `/opt/local/bin/python` 並連結至 `/opt/local/bin/python27`。
 
 ### Node
 
@@ -143,13 +178,27 @@ OS X
 
 安裝 Node
 
-    nvm install 0.10.19
-    nvm use 0.10.19
-    nvm alias default 0.10.19
+    nvm install 0.10.21
+    nvm use 0.10.21
+    nvm alias default 0.10.21
+
+如果不用 NVM 來安裝的話，請直接安裝套件
+
+Ubuntu
+
+    sudo add-apt-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install nodejs
+
+OS X
+
+    sudo port install nodejs npm
 
 安裝前端開發工具套件到全域環境
 
     npm install -g yo bower grunt-cli
+
+如果是用套件安裝的 Node 環境，請使用 sudo。
 
 ### Ruby
 
@@ -168,8 +217,19 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Ruby
 
-    rvm insstall 1.9.3
-    rvm use 1.9.3 --default
+    rvm install 2.0.0
+    rvm use 2.0.0 --default
+
+如果不用 RVM 來安裝的話，請直接安裝套件
+
+Ubuntu
+
+直接使用預設安裝的 Ruby 1.9.3 即可
+
+OS X
+
+    sudo port install ruby20
+    sudo port select --set ruby ruby20
 
 安裝開發工具套件到全域環境
 
@@ -178,6 +238,8 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
     # 安裝 Jekyll 工具
     gem install jekyll
+
+如果是用套件安裝的 Node 環境，請使用 sudo。
 
 ### 文件和圖表
 
@@ -200,8 +262,6 @@ Ruby 環境和 Node 環境類似，為了不因為安裝 Ruby 套件而污染系
 
 安裝 Graphviz
 
-    sudo add-apt-repository ppa:gviz-adm/graphviz-dev
-    sudo apt-get update
     sudo apt-get install graphviz
 
 安裝 PlantUML
