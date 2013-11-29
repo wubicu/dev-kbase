@@ -303,7 +303,9 @@ Canonical 有維護一個官方的 [Ubuntu cloud image](http://docs.openstack.or
 
 連入時要使用金鑰對，例如
 
-    ssh -i keypair.pem 10.0.0.2
+    ssh -i keypair.pem ubuntu@10.0.0.2
+
+Ubuntu cloud image 的預設管理帳號都是 `ubuntu`。
 
 #### 為 Nova-Network 建立可配置的浮動 IP 位址 
 
