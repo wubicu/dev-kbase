@@ -222,17 +222,8 @@ Vagrant 內建使用的虛擬平台是 VirtualBox，要使用 VMware 或雲端�
     ssh.private_key_path = "金鑰對的私鑰檔路徑"
     ...
     config.vm.provider :openstack do |os|
-        aws.access_key_id = "AWS ACCESS KEY ID"
-        aws.secret_access_key = "AWS SECRET ACCESS KEY"
-        aws.keypair_name = "金鑰對名稱"
-
-        aws.region = "AWS 的區域"                 # 例如 ap-southeast-1
-        aws.instance_type = "EC2 實例類型"         # 例如 ti.micro
-        aws.ami = "AMI 的 ID"                   # 例如 ami-5afeab08
-        aws.security_groups = [要使用的安全群組名清單]
-
-        os.username = "使用者名稱"                          # 或用 "#{ENV['OS_USERNAME']}"
-        os.api_key = "使用者密碼"                           # 或用 "#{ENV['OS_PASSWORD']}"
+        os.username = "使用者名稱"                       # 或用 "#{ENV['OS_USERNAME']}"
+        os.api_key = "使用者密碼"                        # 或用 "#{ENV['OS_PASSWORD']}"
         os.flavor = “flavor 名稱”                        # 如 m1.small
         os.image = "系統映像名稱"
         os.endpoint = "OpenStack Keystone 端點 URI"      # 或用 "#{ENV['OS_AUTH_URL']}/tokens"
